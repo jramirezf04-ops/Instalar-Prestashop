@@ -67,9 +67,9 @@ sudo chown www-data:www-data /var/www/html/phppsinfo.php
 - **Comprobación de requisitos:** `http://localhost:8080/phppsinfo.php` (usuario y contraseña por defecto: `prestashop`).
 - **Acceso a phpMyAdmin:** `http://localhost:8080/phpmyadmin/`.
 
-### 3. Variables de entorno (`scripts/.env`)
+### 3. Archivo de variables (`scripts/.env`)
 
-Antes de ejecutar los scripts de HTTPS y despliegue de la tienda, se crea el archivo `/vagrant/scripts/.env` con las variables de configuración:
+Para no escribir contraseñas ni datos fijos dentro de los scripts, creé `/vagrant/scripts/.env` con esta estructura:
 
 ```bash
 DOMAIN="javierramirez-iaw.duckdns.org"
@@ -88,8 +88,7 @@ PS_ADMIN_EMAIL="admin@javierramirez-iaw.duckdns.org"
 PS_ADMIN_PASS="CAMBIAR_PASSWORD"
 ```
 
-
-### 4. Configuración de HTTPS con Let's Encrypt (DNS-01)
+### 4. Certificado HTTPS con Let's Encrypt y DuckDNS
 
 Al trabajar en un entorno local con Vagrant (sin IP pública expuesta en el puerto 80), el script `scripts/setup_letsencrypt_https.sh` solicita el certificado SSL/TLS de Let's Encrypt mediante el desafío **DNS-01** utilizando un subdominio de **DuckDNS** apuntando a `127.0.0.1`:
 
