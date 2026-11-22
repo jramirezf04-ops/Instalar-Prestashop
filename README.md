@@ -1,9 +1,8 @@
-# Despliegue automatizado de PrestaShop sobre pila LAMP con HTTPS (Vagrant + VirtualBox)
+# Instalación de PrestaShop con LAMP y HTTPS en Vagrant
 
-Práctica de **Implantación de Aplicaciones Web** centrada en la automatización completa del despliegue de **PrestaShop 8.1.7** sobre una pila **LAMP** (Linux, Apache, MySQL, PHP 8.1) en entorno local reproducible mediante **Vagrant** y **VirtualBox**, incluyendo **phpMyAdmin** y certificado SSL/TLS válido de **Let's Encrypt** con **DuckDNS**.
+En esta práctica de **Implantación de Aplicaciones Web** he automatizado la instalación de **PrestaShop 8.1.7** sobre una pila **LAMP** (Apache, MySQL y PHP 8.1) usando **Vagrant** y **VirtualBox** en local, junto con **phpMyAdmin** y certificado HTTPS de **Let's Encrypt** mediante **DuckDNS**.
 
-
-## Arquitectura y entorno
+## Datos del entorno
 
 | Componente | Especificación |
 | :--- | :--- |
@@ -74,7 +73,7 @@ sudo bash /vagrant/scripts/install_lamp.sh
 Para comprobar que el entorno cumple todos los requisitos de PrestaShop antes del despliegue, se descargó `phppsinfo.php` en `/var/www/html`:
 
 ```bash
-sudo wget -q [https://raw.githubusercontent.com/PrestaShop/php-ps-info/master/phppsinfo.php](https://raw.githubusercontent.com/PrestaShop/php-ps-info/master/phppsinfo.php) -O /var/www/html/phppsinfo.php
+sudo wget -q https://raw.githubusercontent.com/PrestaShop/php-ps-info/master/phppsinfo.php -O /var/www/html/phppsinfo.php
 sudo chown www-data:www-data /var/www/html/phppsinfo.php
 ```
 
