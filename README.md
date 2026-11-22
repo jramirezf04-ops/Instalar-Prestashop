@@ -28,7 +28,7 @@ En esta práctica de **Implantación de Aplicaciones Web** he automatizado la in
 
 ### 1. Aprovisionamiento de la máquina virtual
 
-El archivo `Vagrantfile` define una máquina virtual Ubuntu 22.04 LTS con VirtualBox y redirección de los puertos `80` y `443` del invitado a los puertos `8080` y `8443` del equipo anfitrión.
+Desde PowerShell en la carpeta del proyecto levanto la máquina y me conecto por SSH:
 
 ```powershell
 vagrant up
