@@ -105,3 +105,43 @@ PS_ADMIN_PASS="CAMBIAR_PASSWORD"
 
 ### 4. Configuración de HTTPS con Let's Encrypt (DNS-01)
 
+Al trabajar en un entorno local con Vagrant (sin IP pública expuesta en el puerto 80), el script `scripts/setup_letsencrypt_https.sh` solicita el certificado SSL/TLS de Let's Encrypt mediante el desafío **DNS-01** utilizando un subdominio de **DuckDNS** apuntando a `127.0.0.1`:
+
+```bash
+sudo bash /vagrant/scripts/setup_letsencrypt_https.sh
+```
+
+Durante la ejecución:
+1. Certbot genera un registro `TXT` temporal para `_acme-challenge.javierramirez-iaw.duckdns.org`.
+2. Se actualiza el registro `TXT` a través de la API de DuckDNS y se verifica su propagación.
+3. Tras emitirse el certificado, el script habilita el módulo `ssl`, genera `/etc/apache2/sites-available/000-default-ssl.conf`, activa el sitio HTTPS y reinicia Apache.
+
+
+### 5. Despliegue automatizado de PrestaShop por CLI
+
+El script `scripts/deploy_prestashop.sh` realiza el despliegue completo sin intervención manual:
+1. Crea la base de datos y el usuario específico en MySQL con las variables de `scripts/.env`.
+2. Limpia `/var/www/html`, descarga **PrestaShop 8.1.7** y descomprime los archivos con propietario `www-data`.
+3. Ejecuta el instalador CLI (`install/index_cli.php`) configurando el dominio con el puerto mapeado (`javierramirez-iaw.duckdns.org:8443`) y `--ssl=1`.
+4. Aplica medidas de seguridad post-instalación: elimina el directorio `/var/www/html/install` y renombra `/var/www/html/admin` a `/var/www/html/admin_ps`.
+5. Limpia los archivos temporales y reinicia Apache.
+
+```bash
+sudo bash /vagrant/scripts/deploy_prestashop.sh
+```
+
+
+## Verificación final
+
+Tras completar todos los scripts, tanto la tienda pública como el panel de administración quedan accesibles bajo HTTPS con certificado válido:
+
+- **Front-Office (Tienda):** `https://javierramirez-iaw.duckdns.org:8443/`
+- **Back-Office (Administración):** `https://javierramirez-iaw.duckdns.org:8443/admin_ps/`
+
+![Verificación del entorno PrestaShop](images/prestashop.png)
+
+![Front-Office de la tienda con HTTPS](images/tienda.png)
+
+![Inicio de sesión del panel de administración](images/entrar_prestashop.png)
+
+![Panel de administración (Back-Office) de PrestaShop](images/administracion.png)
