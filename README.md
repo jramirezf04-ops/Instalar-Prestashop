@@ -52,3 +52,36 @@ vagrant ssh
 ```
 
 La carpeta del proyecto queda sincronizada automáticamente en `/vagrant` dentro de la máquina virtual.
+
+### 2. Instalación de la pila LAMP y phpMyAdmin
+
+El script `scripts/install_lamp.sh` automatiza:
+- Actualización de repositorios e instalación de **Apache**, **MySQL Server** y **PHP 8.1**.
+- Instalación de las extensiones requeridas y recomendadas por PrestaShop (`php-mysql`, `php-curl`, `php-gd`, `php-intl`, `php-mbstring`, `php-xml`, `php-zip`, `php-bcmath`, `php-imagick`, `php-soap`).
+- Instalación desatendida de **phpMyAdmin**.
+- Ajuste de directivas en `/etc/php/8.1/apache2/php.ini` y `/etc/php/8.1/cli/php.ini`:
+  - `memory_limit = 256M`
+  - `max_input_vars = 5000`
+  - `post_max_size = 128M`
+  - `upload_max_filesize = 128M`
+- Despliegue del VirtualHost `conf/000-default.conf` con `AllowOverride All` y habilitación de los módulos `mod_rewrite` y `mod_headers`.
+
+```bash
+sudo bash /vagrant/scripts/install_lamp.sh
+```
+
+#### Verificación de requisitos (`phppsinfo.php`) y phpMyAdmin
+
+Para comprobar que el entorno cumple todos los requisitos de PrestaShop antes del despliegue, se descargó `phppsinfo.php` en `/var/www/html`:
+
+```bash
+sudo wget -q [https://raw.githubusercontent.com/PrestaShop/php-ps-info/master/phppsinfo.php](https://raw.githubusercontent.com/PrestaShop/php-ps-info/master/phppsinfo.php) -O /var/www/html/phppsinfo.php
+sudo chown www-data:www-data /var/www/html/phppsinfo.php
+```
+
+- **Comprobación de requisitos:** `http://localhost:8080/phppsinfo.php` (usuario y contraseña por defecto: `prestashop`).
+- **Acceso a phpMyAdmin:** `http://localhost:8080/phpmyadmin/`.
+
+![Verificación de requisitos con phppsinfo](images/phppsinfo.png)
+
+![Acceso a phpMyAdmin](images/phpmyadmin.png)
