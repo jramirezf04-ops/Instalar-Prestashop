@@ -90,17 +90,13 @@ PS_ADMIN_PASS="CAMBIAR_PASSWORD"
 
 ### 4. Certificado HTTPS con Let's Encrypt y DuckDNS
 
-Al trabajar en un entorno local con Vagrant (sin IP pública expuesta en el puerto 80), el script `scripts/setup_letsencrypt_https.sh` solicita el certificado SSL/TLS de Let's Encrypt mediante el desafío **DNS-01** utilizando un subdominio de **DuckDNS** apuntando a `127.0.0.1`:
+Como la máquina está en local con Vagrant y no tiene IP pública en el puerto 80, usé el reto **DNS-01** de Certbot con mi subdominio de DuckDNS apuntando a `127.0.0.1`:
 
 ```bash
 sudo bash /vagrant/scripts/setup_letsencrypt_https.sh
 ```
 
-Durante la ejecución:
-1. Certbot genera un registro `TXT` temporal para `_acme-challenge.javierramirez-iaw.duckdns.org`.
-2. Se actualiza el registro `TXT` a través de la API de DuckDNS y se verifica su propagación.
-3. Tras emitirse el certificado, el script habilita el módulo `ssl`, genera `/etc/apache2/sites-available/000-default-ssl.conf`, activa el sitio HTTPS y reinicia Apache.
-
+Al ejecutarse, Certbot muestra un código TXT para `_acme-challenge.javierramirez-iaw.duckdns.org`. Tras actualizarlo en DuckDNS y validar el certificado, el propio script habilita el módulo `ssl`, crea `/etc/apache2/sites-available/000-default-ssl.conf` y reinicia Apache.
 
 ### 5. Despliegue automatizado de PrestaShop por CLI
 
