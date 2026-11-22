@@ -67,6 +67,10 @@ sudo chown www-data:www-data /var/www/html/phppsinfo.php
 - **Comprobación de requisitos:** `http://localhost:8080/phppsinfo.php` (usuario y contraseña por defecto: `prestashop`).
 - **Acceso a phpMyAdmin:** `http://localhost:8080/phpmyadmin/`.
 
+![Acceso a phppsinfo.php](images/entrar_prestashop.png)
+
+![Verificación de requisitos con phppsinfo.php](images/prestashop.png)
+
 ### 3. Archivo de variables (`scripts/.env`)
 
 Para no escribir contraseñas ni datos fijos dentro de los scripts, creé `/vagrant/scripts/.env` con esta estructura:
@@ -119,10 +123,7 @@ Tras completar todos los scripts, tanto la tienda pública como el panel de admi
 - **Front-Office (Tienda):** `https://javierramirez-iaw.duckdns.org:8443/`
 - **Back-Office (Administración):** `https://javierramirez-iaw.duckdns.org:8443/admin_ps/`
 
-![Verificación del entorno PrestaShop](images/prestashop.png)
 
 ![Front-Office de la tienda con HTTPS](images/tienda.png)
-
-![Inicio de sesión del panel de administración](images/entrar_prestashop.png)
 
 ![Panel de administración (Back-Office) de PrestaShop](images/administracion.png)
