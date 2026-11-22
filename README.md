@@ -19,25 +19,23 @@ Práctica de **Implantación de Aplicaciones Web** centrada en la automatizació
 ## Estructura del repositorio
 
 ```text
-Instalar_Prestashop/
-├── .gitignore
+Instalar-Prestashop/
 ├── README.md
 ├── Vagrantfile
 ├── conf/
 │   └── 000-default.conf
 ├── images/
-│   ├── phppsinfo.png
-│   ├── phpmyadmin.png
-│   ├── prestashop-front.png
-│   └── prestashop-back.png
+│   ├── administracion.png
+│   ├── entrar_prestashop.png
+│   ├── prestashop.png
+│   └── tienda.png
 └── scripts/
-    ├── .env.example
     ├── install_lamp.sh
     ├── setup_letsencrypt_https.sh
     └── deploy_prestashop.sh
 ```
 
-> **Nota de seguridad:** El archivo `scripts/.env` con las credenciales reales y el directorio `.vagrant/` están excluidos del control de versiones mediante `.gitignore`. Para reproducir la práctica, copia `scripts/.env.example` como `scripts/.env` y rellena tus valores.
+> **Nota de seguridad:** El archivo `scripts/.env` con las credenciales reales no se incluye en el repositorio para proteger las contraseñas. Más abajo se detalla su estructura para reproducir el despliegue.
 
 
 ## Proceso de despliegue paso a paso
@@ -52,6 +50,7 @@ vagrant ssh
 ```
 
 La carpeta del proyecto queda sincronizada automáticamente en `/vagrant` dentro de la máquina virtual.
+
 
 ### 2. Instalación de la pila LAMP y phpMyAdmin
 
