@@ -4,38 +4,25 @@ En esta práctica de **Implantación de Aplicaciones Web** he automatizado la in
 
 ## Datos del entorno
 
-| Componente | Especificación |
+| Componente | Configuración |
 | :--- | :--- |
 | **Sistema Operativo** | Ubuntu 22.04 LTS (`bento/ubuntu-22.04`) |
-| **Recursos de la VM** | 2 CPUs · 2048 MB RAM · Hostname `JavierRamirezPrestashop` |
-| **Redirección de puertos** | `8080 → 80` (HTTP) · `8443 → 443` (HTTPS) |
-| **Pila LAMP** | Apache 2 · MySQL 8.0 · PHP 8.1 + extensiones requeridas |
-| **Gestión de BD** | phpMyAdmin |
-| **Dominio y SSL/TLS** | `javierramirez-iaw.duckdns.org` (apuntando a `127.0.0.1`) · Certbot (desafío DNS-01) |
-| **Aplicación** | PrestaShop 8.1.7 (instalación desatendida por CLI) |
+| **Máquina Virtual** | 2 CPUs, 2048 MB de RAM (`JavierRamirezPrestashop`) |
+| **Puertos** | `8080 -> 80` (HTTP), `8443 -> 443` (HTTPS) |
+| **Pila LAMP** | Apache 2, MySQL 8.0, PHP 8.1 y phpMyAdmin |
+| **Dominio y SSL** | `javierramirez-iaw.duckdns.org` (apuntando a `127.0.0.1`) con Certbot (DNS-01) |
+| **Aplicación** | PrestaShop 8.1.7 (instalado por CLI) |
 
+## Archivos del repositorio
 
-## Estructura del repositorio
+- `Vagrantfile`: configuración de la máquina virtual y redirección de puertos.
+- `conf/000-default.conf`: VirtualHost de Apache con `AllowOverride All`.
+- `scripts/install_lamp.sh`: instala Apache, MySQL, PHP 8.1 con sus extensiones, phpMyAdmin y ajusta `php.ini`.
+- `scripts/setup_letsencrypt_https.sh`: genera el certificado SSL con Certbot y activa el sitio HTTPS en Apache.
+- `scripts/deploy_prestashop.sh`: crea la base de datos, descarga PrestaShop y lanza la instalación por CLI.
+- `images/`: capturas de la verificación final.
 
-```text
-Instalar-Prestashop/
-├── README.md
-├── Vagrantfile
-├── conf/
-│   └── 000-default.conf
-├── images/
-│   ├── administracion.png
-│   ├── entrar_prestashop.png
-│   ├── prestashop.png
-│   └── tienda.png
-└── scripts/
-    ├── install_lamp.sh
-    ├── setup_letsencrypt_https.sh
-    └── deploy_prestashop.sh
-```
-
-> **Nota de seguridad:** El archivo `scripts/.env` con las credenciales reales no se incluye en el repositorio para proteger las contraseñas. Más abajo se detalla su estructura para reproducir el despliegue.
-
+*(El archivo `scripts/.env` no está subido al repositorio para no exponer las contraseñas).*
 
 ## Proceso de despliegue paso a paso
 
