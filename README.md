@@ -81,6 +81,27 @@ sudo chown www-data:www-data /var/www/html/phppsinfo.php
 - **Comprobación de requisitos:** `http://localhost:8080/phppsinfo.php` (usuario y contraseña por defecto: `prestashop`).
 - **Acceso a phpMyAdmin:** `http://localhost:8080/phpmyadmin/`.
 
-![Verificación de requisitos con phppsinfo](images/phppsinfo.png)
+### 3. Variables de entorno (`scripts/.env`)
 
-![Acceso a phpMyAdmin](images/phpmyadmin.png)
+Antes de ejecutar los scripts de HTTPS y despliegue de la tienda, se crea el archivo `/vagrant/scripts/.env` con las variables de configuración:
+
+```bash
+DOMAIN="javierramirez-iaw.duckdns.org"
+CERTBOT_EMAIL="tu_correo@ejemplo.com"
+
+DB_NAME="prestashop"
+DB_USER="ps_user"
+DB_PASS="CAMBIAR_PASSWORD"
+
+PS_SHOP_NAME="Tienda Javier Ramirez"
+PS_COUNTRY="es"
+PS_LANGUAGE="es"
+PS_ADMIN_FIRSTNAME="Javier"
+PS_ADMIN_LASTNAME="Ramirez"
+PS_ADMIN_EMAIL="admin@javierramirez-iaw.duckdns.org"
+PS_ADMIN_PASS="CAMBIAR_PASSWORD"
+```
+
+
+### 4. Configuración de HTTPS con Let's Encrypt (DNS-01)
+
